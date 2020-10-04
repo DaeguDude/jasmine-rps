@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<script>
+  function getRandomIntInclusive(min, max) {
+    // min과 max을 포함한, min max 사이의 정수를 반환합니다.
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
+  function computerPlay() {
+    // Rock, Paper, Scissor 중 하나를 반환합니다.
+    let randomNumber = getRandomIntInclusive(0, 2);
+
+    switch(randomNumber) {
+      case 0:
+        return 'rock';
+        break;
+      case 1:
+        return 'paper';
+        break;
+      case 2:
+        return 'scissors';
+        break;
+    } 
+  }
+
+  function checkSelectionValidity(selection) {
+    selection = selection.toLowerCase();
+
+    if (
+      selection === 'rock'
+      || selection === 'paper'
+      || selection === 'scissors'
+    ) {
+      return true;
+    } 
+
+    return false;
+  }
+
+  function decideWinner(playerSelection, computerSelection) {
+    if (playerSelection === computerSelection) {
+      return `무승부!, ${playerSelection}와 ${computerSelection}는 비깁니다.`;
+    } else {
+      // 이기는 시나리오
+      if (
+        playerSelection === 'rock' && computerSelection === 'scissors'
+        || playerSelection === 'paper' && computerSelection === 'rock'
+        || playerSelection === 'scissors' && computerSelection === 'paper'
+      ) {
+        return `이겼습니다! ${playerSelection}는 ${computerSelection}를 이깁니다.`;
+      }
+
+      // 지는 시나리오
+      if (
+        playerSelection === 'rock' && computerSelection === 'paper'
+        || playerSelection === 'paper' && computerSelection === 'scissors'
+        || playerSelection === 'scissors' && computerSelection === 'rock'
+      ) {
+        return `졌습니다! ${playerSelection}는 ${computerSelection}을 이기지 못합니다.`;
+      }
+    }
+  }
+
+  function getWinner(result) {
+    if (result.startsWith('이겼습니다')) {
+      return 'player';
+    } 
+    
+    if (result.startsWith('졌습니다')) {
+      return 'computer';
+    } 
+  }
+
+  function playRound(playerSelection, computerSelection) {
+    let areInputsValid;
+    let areSelectionIdentical;
+
+    if (
+      checkSelectionValidity(playerSelection)
+      && checkSelectionValidity(computerSelection)
+    ) {
+      return decideWinner(playerSelection, computerSelection);
+    } 
+    else {
+      return `입력하신 값 ${playerSelection}, ${computerSelection} 이 올바르지 않습니다.`;
+    }
+  }
+
+  function game() {
+    let userNumberOfWins = 0;
+    let computerNumberOfWins = 0;
+
+    // 첫번째
+    let playerSelection = prompt('rock, paper, scissors중 하나를 입력해주세요.');
+    let computerSelection = computerPlay();
+    let eachRoundResult = playRound(playerSelection, computerSelection);
+    if (getWinner(eachRoundResult) === 'player') {
+      userNumberOfWins++;
+    }
+    if (getWinner(eachRoundResult) === 'computer') {
+      computerNumberOfWins++;
+    }
+    console.log(eachRoundResult);
+
+    // 두번째
+    playerSelection = prompt('rock, paper, scissors중 하나를 입력해주세요.');
+    computerSelection = computerPlay();
+    eachRoundResult = playRound(playerSelection, computerSelection);
+    if (getWinner(eachRoundResult) === 'player') {
+      userNumberOfWins++;
+    }
+    if (getWinner(eachRoundResult) === 'computer') {
+      computerNumberOfWins++;
+    }
+    console.log(eachRoundResult);
+
+    // 세번째
+    playerSelection = prompt('rock, paper, scissors중 하나를 입력해주세요.');
+    computerSelection = computerPlay();
+    eachRoundResult = playRound(playerSelection, computerSelection);
+    if (getWinner(eachRoundResult) === 'player') {
+      userNumberOfWins++;
+    }
+    if (getWinner(eachRoundResult) === 'computer') {
+      computerNumberOfWins++;
+    }
+    console.log(eachRoundResult);
+
+    // 네번째
+    playerSelection = prompt('rock, paper, scissors중 하나를 입력해주세요.');
+    computerSelection = computerPlay();
+    eachRoundResult = playRound(playerSelection, computerSelection);
+    if (getWinner(eachRoundResult) === 'player') {
+      userNumberOfWins++;
+    }
+    if (getWinner(eachRoundResult) === 'computer') {
+      computerNumberOfWins++;
+    }
+    console.log(eachRoundResult);
+
+    // 다섯번째
+    playerSelection = prompt('rock, paper, scissors중 하나를 입력해주세요.');
+    computerSelection = computerPlay();
+    eachRoundResult = playRound(playerSelection, computerSelection);
+    if (getWinner(eachRoundResult) === 'player') {
+      userNumberOfWins++;
+    }
+    if (getWinner(eachRoundResult) === 'computer') {
+      computerNumberOfWins++;
+    }
+    console.log(eachRoundResult);
+
+    console.log('--------------------------------------------------');
+    console.log('마지막 결과: ');
+    if (userNumberOfWins === computerNumberOfWins) {
+      console.log(`${userNumberOfWins} 대 ${computerNumberOfWins}으로 비겼습니다.`);
+    } else if (userNumberOfWins > computerNumberOfWins) {
+      console.log(`${userNumberOfWins} 대 ${computerNumberOfWins}으로 당신이 이겼습니다!.`);
+    } else {
+      console.log(`${userNumberOfWins} 대 ${computerNumberOfWins}으로 컴퓨터에게 졌습니다.`);
+    }
+  }
+    
+
+game();
+
+    
+
+  
+  
+</script>
+<body>
+
+</body>
+</html>
